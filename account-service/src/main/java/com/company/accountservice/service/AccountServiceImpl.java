@@ -9,17 +9,18 @@ public class AccountServiceImpl implements AccountServiceInter {
 
     @Override
     public Account get(String id) {
-        return null;
+        return new Account("test-id");
     }
+
 
     @Override
     public Account add(Account account) {
-        return null;
+        return new Account("test-id");
     }
 
     @Override
     public Account update(Account account) {
-        return null;
+        return new Account("test-id");
     }
 
     @Override
@@ -27,8 +28,4 @@ public class AccountServiceImpl implements AccountServiceInter {
 
     }
 
-    @Override
-    public Account pagination() {
-        return null;
-    }
 }

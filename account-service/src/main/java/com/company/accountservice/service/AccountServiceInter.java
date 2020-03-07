@@ -13,5 +13,4 @@ public interface AccountServiceInter {
 
     public void delete(String id);
 
-    public Account pagination();
 }
