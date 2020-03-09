@@ -5,9 +5,11 @@ import com.company.accountservice.service.AccountServiceInter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("account")
+@RequestMapping("/accounts")
 /**
  * localhost:8080/account
  *
@@ -25,19 +27,24 @@ public class AccountController {
         return ResponseEntity.ok(accountServiceInter.get(id));
     }
 
+    @GetMapping
+    public ResponseEntity<List<Account>> getAll() {
+        return ResponseEntity.ok(accountServiceInter.findAll());
+    }
+
 
     @PostMapping
     public ResponseEntity<Account> add(@RequestBody Account account) {
         return ResponseEntity.ok(accountServiceInter.add(account));
     }
 
-    @PutMapping
-    public ResponseEntity<Account> update(Account account) {
-        return ResponseEntity.ok(accountServiceInter.update(account));
+    @PutMapping("/{id}")
+    public ResponseEntity<Account> update(@PathVariable("id") String id,@RequestBody Account account) {
+        return ResponseEntity.ok(accountServiceInter.update(id,account));
     }
 
-    @DeleteMapping
-    public void delete(String id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") String id) {
         accountServiceInter.delete(id);
     }
 

@@ -1,7 +1,7 @@
 package com.company.accountservice.service;
 
 import com.company.accountservice.entity.Account;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 
 public interface AccountServiceInter {
 
@@ -9,8 +9,10 @@ public interface AccountServiceInter {
 
     public Account add(Account account);
 
-    public Account update(Account account);
+    public Account update(String id, Account account);
 
     public void delete(String id);
+
+    public List<Account> findAll();
 
 }
