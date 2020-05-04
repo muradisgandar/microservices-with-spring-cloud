@@ -3,7 +3,6 @@ package com.company.accountservice.service;
 import com.company.accountservice.dao.AccountRepository;
 import com.company.accountservice.entity.Account;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +18,7 @@ public class AccountServiceImpl implements AccountServiceInter {
 
     @Override
     public Account get(String id) {
-        return accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+        return accountRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     @Override

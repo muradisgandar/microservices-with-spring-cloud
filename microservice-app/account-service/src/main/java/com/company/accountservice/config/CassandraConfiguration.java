@@ -11,24 +11,24 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 @EnableCassandraRepositories
 public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
-    @Value("${spcloud.cassandra.keyspace.name}")
-    private String keyspacename;
-
-    @Value("${spcloud.cassandra.contact.point}")
-    private String contactPoint;
-
-    @Value("${spcloud.cassandra.port}")
-    private Integer port;
-
-    @Value("${spcloud.cassandra.username}")
+    @Value("${spring.cloud.cassandra.username}")
     private String username;
 
-    @Value("${spcloud.cassandra.password}")
+    @Value("${spring.cloud.cassandra.contact.point}")
+    private String contactPoint;
+
+    @Value("${spring.cloud.cassandra.port}")
+    private Integer port;
+
+    @Value("${spring.cloud.cassandra.password}")
     private String password;
+
+    @Value("${spring.cloud.cassandra.keyspace.name}")
+    private String keySpaceName;
 
     @Override
     protected String getKeyspaceName() {
-        return keyspacename;
+        return keySpaceName;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public String[] getEntityBasePackages() {
-        return new String[] {"com.company.accountservice"};
+        return new String[]{"com.company.accountservice"};
     }
 
     @Override
