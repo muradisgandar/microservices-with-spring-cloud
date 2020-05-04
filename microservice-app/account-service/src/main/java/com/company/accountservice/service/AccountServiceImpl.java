@@ -30,16 +30,16 @@ public class AccountServiceImpl implements AccountServiceInter {
     @Override
     public Account update(String id, Account account) {
         Account acc = accountRepository.findById(id).get();
-        if(account.getEmail()!=null && !account.getEmail().isEmpty()){
+        if (account.getEmail() != null && !account.getEmail().isEmpty()) {
             acc.setEmail(account.getEmail());
         }
-        if(account.getUsername() !=null && !account.getUsername().isEmpty()){
+        if (account.getUsername() != null && !account.getUsername().isEmpty()) {
             acc.setUsername(account.getUsername());
         }
-        if(account.getPassword() !=null && !account.getPassword().isEmpty()){
+        if (account.getPassword() != null && !account.getPassword().isEmpty()) {
             acc.setPassword(account.getPassword());
         }
-        if(account.getActive()!=null){
+        if (account.getActive() != null) {
             acc.setActive(account.getActive());
         }
 
