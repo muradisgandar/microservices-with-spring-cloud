@@ -1,59 +1,78 @@
 package com.company.accountservice.service;
 
 import com.company.accountservice.dao.AccountRepository;
+import com.company.accountservice.dto.AccountDTO;
 import com.company.accountservice.entity.Account;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountServiceInter {
 
     private final AccountRepository accountRepository;
+    private final ModelMapper modelMapper;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, ModelMapper modelMapper) {
         this.accountRepository = accountRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Account get(String id) {
-        return accountRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    public AccountDTO get(String id) {
+        Account account = accountRepository.findById(id).
+                orElseThrow(IllegalArgumentException::new);
+        return modelMapper.map(account, AccountDTO.class);
     }
 
+    @Transactional
     @Override
-    public Account add(Account account) {
-        account.setCreatedAt(new java.sql.Date(new Date().getTime()));
-        return accountRepository.save(account);
+    public AccountDTO add(AccountDTO accountDTO) {
+        //account.setCreatedAt(new java.sql.Date(new Date().getTime()));
+        Account account = modelMapper.map(accountDTO, Account.class);
+        account = accountRepository.save(account);
+        accountDTO.setId(account.getId());
+        return accountDTO;
     }
 
+    @Transactional
     @Override
-    public Account update(String id, Account account) {
-        Account acc = accountRepository.findById(id).get();
-        if (account.getEmail() != null && !account.getEmail().isEmpty()) {
-            acc.setEmail(account.getEmail());
-        }
-        if (account.getUsername() != null && !account.getUsername().isEmpty()) {
-            acc.setUsername(account.getUsername());
-        }
-        if (account.getPassword() != null && !account.getPassword().isEmpty()) {
-            acc.setPassword(account.getPassword());
-        }
-        if (account.getActive() != null) {
-            acc.setActive(account.getActive());
+    public AccountDTO update(String id, AccountDTO accountDTO) {
+        Optional<Account> account = accountRepository.findById(id);
+        if (account.isPresent()) {
+            Account accountToUpdate = account.get();
+            if (accountDTO.getBirthDate() != null) {
+                accountToUpdate.setBirthDate(accountDTO.getBirthDate());
+            }
+            if (accountDTO.getName() != null) {
+                accountToUpdate.setName(accountDTO.getName());
+            }
+            if (accountDTO.getSurname() != null) {
+                accountToUpdate.setSurname(accountDTO.getSurname());
+            }
+
+            return modelMapper.map(accountRepository.save(accountToUpdate), AccountDTO.class);
+
+        } else {
+            throw new IllegalArgumentException();
         }
 
-        return accountRepository.save(acc);
     }
 
+    @Transactional
     @Override
     public void delete(String id) {
-        accountRepository.deleteById(id);
+        Account account = accountRepository.findById(id).
+                orElseThrow(IllegalArgumentException::new);
+        accountRepository.delete(account);
     }
 
     @Override
-    public List<Account> findAll() {
-        return accountRepository.findAll();
+    public List<AccountDTO> findAll() {
+        return null;
     }
 
 }

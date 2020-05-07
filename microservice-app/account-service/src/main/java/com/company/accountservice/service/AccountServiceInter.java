@@ -1,19 +1,19 @@
 package com.company.accountservice.service;
 
-import com.company.accountservice.entity.Account;
+import com.company.accountservice.dto.AccountDTO;
 
 import java.util.List;
 
 public interface AccountServiceInter {
 
-    Account get(String id);
+    AccountDTO get(String id);
 
-    Account add(Account account);
+    AccountDTO add(AccountDTO account);
 
-    Account update(String id, Account account);
+    AccountDTO update(String id, AccountDTO account);
 
     void delete(String id);
 
-    List<Account> findAll();
+    List<AccountDTO> findAll();
 
 }

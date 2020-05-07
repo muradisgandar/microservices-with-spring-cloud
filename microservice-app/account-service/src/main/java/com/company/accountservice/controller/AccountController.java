@@ -1,7 +1,8 @@
 package com.company.accountservice.controller;
 
-import com.company.accountservice.entity.Account;
+import com.company.accountservice.dto.AccountDTO;
 import com.company.accountservice.service.AccountServiceInter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,37 +17,30 @@ import java.util.List;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/accounts")
-/**
- * localhost:8080/account
- *
- */
 public class AccountController {
 
     private final AccountServiceInter accountServiceInter;
 
-    public AccountController(AccountServiceInter accountServiceInter) {
-        this.accountServiceInter = accountServiceInter;
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<Account> get(@PathVariable("id") String id) {
+    public ResponseEntity<AccountDTO> get(@PathVariable("id") String id) {
         return ResponseEntity.ok(accountServiceInter.get(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<Account>> getAll() {
+    public ResponseEntity<List<AccountDTO>> getAll() {
         return ResponseEntity.ok(accountServiceInter.findAll());
     }
 
 
     @PostMapping
-    public ResponseEntity<Account> add(@RequestBody Account account) {
+    public ResponseEntity<AccountDTO> add(@RequestBody AccountDTO account) {
         return ResponseEntity.ok(accountServiceInter.add(account));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Account> update(@PathVariable("id") String id, @RequestBody Account account) {
+    public ResponseEntity<AccountDTO> update(@PathVariable("id") String id, @RequestBody AccountDTO account) {
         return ResponseEntity.ok(accountServiceInter.update(id, account));
     }
 

@@ -1,7 +1,6 @@
 package com.company.accountservice.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -15,7 +14,6 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(value = "accounts")
 public class Account implements Serializable {
 
@@ -24,6 +22,15 @@ public class Account implements Serializable {
 
     @Column(value = "uname")
     private String username;
+
+    @Column(value = "name")
+    private String name;
+
+    @Column(value = "surname")
+    private String surname;
+
+    @Column(value = "birth_date")
+    private Date birthDate;
 
     @Column(value = "email")
     private String email;
