@@ -1,4 +1,4 @@
-package com.company.accountservice.entity;
+package com.company.accountservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

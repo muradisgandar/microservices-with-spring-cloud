@@ -2,7 +2,7 @@ package com.company.accountservice.service;
 
 import com.company.accountservice.dao.AccountRepository;
 import com.company.accountservice.dto.AccountDTO;
-import com.company.accountservice.entity.Account;
+import com.company.accountservice.model.Account;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package com.company.accountservice.dao;
 
-import com.company.accountservice.entity.Account;
+import com.company.accountservice.model.Account;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
