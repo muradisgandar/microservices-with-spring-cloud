@@ -1,6 +1,6 @@
 package com.company.accountservice.service;
 
-import com.company.accountservice.dto.AccountDTO;
+import com.company.client.contract.AccountDTO;
 
 import java.util.List;
 

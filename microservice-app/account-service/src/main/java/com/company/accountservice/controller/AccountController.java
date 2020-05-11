@@ -1,7 +1,7 @@
 package com.company.accountservice.controller;
 
-import com.company.accountservice.dto.AccountDTO;
 import com.company.accountservice.service.AccountServiceInter;
+import com.company.client.contract.AccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

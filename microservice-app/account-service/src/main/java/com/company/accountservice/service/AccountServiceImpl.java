@@ -1,14 +1,15 @@
 package com.company.accountservice.service;
 
 import com.company.accountservice.dao.AccountRepository;
-import com.company.accountservice.dto.AccountDTO;
 import com.company.accountservice.model.Account;
+import com.company.client.contract.AccountDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountServiceInter {
@@ -33,6 +34,7 @@ public class AccountServiceImpl implements AccountServiceInter {
     public AccountDTO add(AccountDTO accountDTO) {
         //account.setCreatedAt(new java.sql.Date(new Date().getTime()));
         Account account = modelMapper.map(accountDTO, Account.class);
+        //account.setId(UUID.randomUUID().toString());
         account = accountRepository.save(account);
         accountDTO.setId(account.getId());
         return accountDTO;
