@@ -20,3 +20,11 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+  rabbitmq:
+    username: notification
+    password: notification
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: msqueue

@@ -9,6 +9,7 @@ import com.company.ticketservice.model.Ticket;
 import com.company.ticketservice.model.TicketStatus;
 import com.company.ticketservice.repository.TicketRepository;
 import com.company.ticketservice.repository.es.TicketElasticRepository;
+import com.company.ticketservice.service.TicketNotificationService;
 import com.company.ticketservice.service.TicketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -22,22 +23,22 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketElasticRepository ticketElasticRepository;
     private final TicketRepository ticketRepository;
-    private final ModelMapper modelMapper;
+    private final TicketNotificationService ticketNotificationService;
     private final AccountServiceClient accountServiceClient;
 
     public TicketServiceImpl(TicketElasticRepository ticketElasticRepository,
                              TicketRepository ticketRepository,
                              ModelMapper modelMapper,
+                             TicketNotificationService ticketNotificationService,
                              AccountServiceClient accountServiceClient) {
         this.ticketElasticRepository = ticketElasticRepository;
         this.ticketRepository = ticketRepository;
-        this.modelMapper = modelMapper;
+        this.ticketNotificationService = ticketNotificationService;
         this.accountServiceClient = accountServiceClient;
     }
 
 
     @Override
-    @Transactional
     public TicketDTO save(TicketDTO ticketDTO) {
         ResponseEntity<AccountDTO> accountDTOResponseEntity = accountServiceClient.get(ticketDTO.getAssignee());
         Ticket ticket = Ticket.builder()
@@ -64,6 +65,8 @@ public class TicketServiceImpl implements TicketService {
         ticketElasticRepository.save(ticketModel);
 
         ticketDTO.setId(ticket.getId());
+
+        ticketNotificationService.sendToQueue(ticket);
 
         return ticketDTO;
     }
