@@ -3,12 +3,16 @@ CREATE KEYSPACE springcloud
 
 use springcloud;
 
-CREATE TABLE emp(
-                    emp_id int PRIMARY KEY,
-                    emp_name text,
-                    emp_city text,
-                    emp_sal varint,
-                    emp_phone varint
+CREATE TABLE accounts(
+                    id varchar PRIMARY KEY,
+                    name varchar,
+                    uname varchar,
+                    surname varchar,
+                    birth_date timestamp,
+                    pwd varchar,
+                    email varchar,
+                    created_at,
+                    is_active boolean
 );
 
-select * from emp;
+select * from accounts
