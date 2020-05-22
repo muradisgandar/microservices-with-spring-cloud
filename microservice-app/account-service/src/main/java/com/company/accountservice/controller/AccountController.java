@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
 
     private final AccountServiceInter accountServiceInter;

@@ -31,6 +31,8 @@
         <module>service-common</module>
         <module>notification-service</module>
         <module>zipkin-server</module>
+        <module>hystrix-dashboard</module>
+        <module>gateway-server</module>
     </modules>
 
     <dependencyManagement>
