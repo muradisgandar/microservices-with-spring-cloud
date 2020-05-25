@@ -33,6 +33,7 @@
         <module>zipkin-server</module>
         <module>hystrix-dashboard</module>
         <module>gateway-server</module>
+        <module>admin-server</module>
     </modules>
 
     <dependencyManagement>
